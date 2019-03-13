@@ -1,14 +1,14 @@
 # ReNa-TurateIT
 A React-Native App with Redux State-Management
 
-# Init React Native Project:
+## Init React Native Project:
 ```sh
 npm install -g expo-cli
 expo init renaexp .
 npm install
 ```
 
-# Start App
+## Start App
 ```sh
 startAndroidEmulator.bat
 npm run android # in a new terminal
@@ -16,7 +16,7 @@ npm run android # in a new terminal
     # -> installs & starts app on running emulator
 ```
 
-# Redux
+## Redux
 > $ npm install redux react-redux --save
 ```js
 // implementation:
@@ -44,7 +44,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 1. Login (HTTP-GET with response code 200)
 2. No Tab-Change if not logged in!
 
-# Directory Structure
+## Directory Structure
 <img src=_res/dir_structure.png width="550px">
-# Development Environment
+## Development Environment
 <img src=_res/devenv.png width="550px">
