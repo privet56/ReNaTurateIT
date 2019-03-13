@@ -46,5 +46,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 
 ## Directory Structure
 <img src=_res/dir_structure.png width="550px">
+
 ## Development Environment
-<img src=_res/devenv.png width="550px">
+<img src=_res/devenv.png width="750px">
