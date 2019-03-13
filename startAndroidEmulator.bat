@@ -1,0 +1,1 @@
+%ANDROID_SDK_HOME%\emulator\emulator.exe -netdelay none -netspeed full -avd exus_5X_API_28_x86 -datadir %ANDROID_SDK_HOME%\.android\avd\exus_5X_API_28_x86.avd -cache %ANDROID_SDK_HOME%\.android\avd\exus_5X_API_28_x86.avd\cache.img

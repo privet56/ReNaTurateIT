@@ -1,0 +1,235 @@
+import React from 'react';
+import {
+  Image,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ImageBackground,
+  TextInput,
+  Button,
+  View,
+} from 'react-native';
+import { WebBrowser } from 'expo';
+
+import { MonoText } from '../components/StyledText';
+
+import { connect } from 'react-redux';
+import { setAuthData } from '../flux/actions/actions.auth';
+
+export class HomeScreen extends React.Component
+{
+  constructor(props) {
+    super(props);
+    this.state = {un:'', pwd:''};
+  }
+
+  static navigationOptions = {
+    header: null,
+  };
+
+  render() {
+    return (
+      <ImageBackground source={require('../assets/images/spring-background-with-leaves.png') } style={{width: '100%', height: '100%'}}>
+
+        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+          <View style={styles.welcomeContainer}>
+            <Image style={styles.welcomeImage}
+              source={ __DEV__ ? require('../assets/images/springi.png') : require('../assets/images/springi.png') } />
+          </View>
+
+          <View style={styles.getStartedContainer}>
+            {this._maybeRenderDevelopmentModeWarning()}
+
+            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
+              <MonoText style={styles.codeHighlightText}>Log Me In if you can!</MonoText>
+            </View>
+          </View>
+
+          <TextInput style={styles.inp} value={this.state.un}
+            onChangeText={(un) => this.setState({un})} placeholder="username" />
+          <TextInput style={styles.inp} value={this.state.pwd} secureTextEntry={true}
+            onChangeText={(pwd) => this.setState({pwd})} placeholder="password" />
+
+
+          <View style={styles.helpContainer}>
+
+            {/*<Button onPress={this.onLogin} title="Login?" style={styles.btn} accessibilityLabel="Login?" color="orange" />*/}
+            <TouchableOpacity onPress={this.onLogin} style={styles.btn}>
+              <Text> Log me In! </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
+              <Text style={styles.helpLinkText}>Help...</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+
+        <View style={styles.tabBarInfoContainer}>
+          <Text style={styles.tabBarInfoText}>Navigation per Tabs is here:</Text>
+        </View>
+      
+       </ImageBackground>
+    );
+  }
+
+  _maybeRenderDevelopmentModeWarning() {
+    if (__DEV__) {
+      const learnMoreButton = (
+        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>  </Text>
+      );
+
+      return (
+        <Text style={styles.developmentModeText}> ReNaTurate! {learnMoreButton} </Text>
+      );
+    } else {
+      return (
+        <Text style={styles.developmentModeText}> You are not in development mode, your app will run at full speed. </Text>
+      );
+    }
+  }
+
+  _handleLearnMorePress = () => {
+    WebBrowser.openBrowserAsync('https://www.google.com/');
+  };
+
+  _handleHelpPress = () => {
+    WebBrowser.openBrowserAsync('https://www.google.com/');
+  };
+
+  onLogin = () => {
+    this.props.setAuth({un:this.state.un, pwd:this.state.pwd});  //set Redux state!
+  };
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'transparent',
+  },
+  developmentModeText: {
+    marginBottom: 20,
+    color: 'rgba(0,0,0,0.4)',
+    fontSize: 24,
+    lineHeight: 29,
+    textAlign: 'center',
+  },
+  contentContainer: {
+    paddingTop: 30,
+  },
+  welcomeContainer: {
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  inp: {
+    height: 33, borderColor: 'lightgray', borderWidth: 1, marginRight: 9, marginLeft: 9, padding: 9, marginTop: 11,
+  },
+  welcomeImage: {
+    width: 100,
+    height: 80,
+    resizeMode: 'contain',
+    marginTop: 90,
+    marginLeft: -10,
+  },
+  getStartedContainer: {
+    alignItems: 'center',
+    marginHorizontal: 50,
+  },
+  homeScreenFilename: {
+    marginVertical: 7,
+  },
+  codeHighlightText: {
+    color: 'rgba(96,100,109, 0.8)',
+  },
+  codeHighlightContainer: {
+    backgroundColor: 'rgba(0,0,0,0.05)',
+    borderRadius: 3,
+    paddingHorizontal: 4,
+  },
+  getStartedText: {
+    fontSize: 17,
+    color: 'rgba(96,100,109, 1)',
+    lineHeight: 24,
+    textAlign: 'center',
+  },
+  tabBarInfoContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    ...Platform.select({
+      ios: {
+        shadowColor: 'black',
+        shadowOffset: { height: -3 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+      },
+      android: {
+        elevation: 20,
+      },
+    }),
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    paddingVertical: 20,
+  },
+  tabBarInfoText: {
+    fontSize: 17,
+    color: 'rgba(96,100,109, 1)',
+    textAlign: 'center',
+  },
+  navigationFilename: {
+    marginTop: 5,
+  },
+  helpContainer: {
+    marginTop: 15,
+    alignItems: 'center',
+  },
+  helpLink: {
+    paddingVertical: 15,
+  },
+  btn: {
+    marginTop:10,
+    paddingTop:20,
+    paddingBottom:20,
+    color:'red',
+    backgroundColor:'orange',
+    borderRadius:90,
+    borderWidth: 3,
+    borderColor: 'gray',
+    width: 99,
+    height: 99,
+    shadowColor: 'black',
+    shadowOffset: { height: -33 },
+    shadowOpacity: 0.1,
+    shadowRadius: 33,
+    alignItems: 'center',
+    textAlign: 'right',
+    justifyContent: 'center',
+    elevation: 13,
+  },
+
+  helpLinkText: {
+    fontSize: 14,
+    color: '#2e78b7',
+  },
+});
+
+const mapStateToProps = state => {
+
+  return {
+    un: state.un,
+    pwd: state.pwd
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setAuth: (authData) => {
+      dispatch(setAuthData(authData));
+    }
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
