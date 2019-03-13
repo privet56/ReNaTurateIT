@@ -45,7 +45,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 2. No Tab-Change if not logged in!
 
 ## Directory Structure
-<img src=_res/dir_structure.png width="550px">
+<img src=_res/dir_structure.png width="450px">
 
 ## Development Environment
 <img src=_res/devenv.png width="750px">
