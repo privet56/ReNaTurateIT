@@ -3,17 +3,17 @@ A React-Native App with Redux State-Management
 
 ## Init React Native Project:
 ```sh
-npm install -g expo-cli
-expo init renaexp .
+NO: npm install -g expo-cli
+NO: expo init renaexp .
+npm install -g react-native-cli
+react-native init renaexp
 npm install
 ```
 
 ## Start App
 ```sh
 startAndroidEmulator.bat
-npm run android # in a new terminal
-    # -> http://localhost:19002/ = DevTools
-    # -> installs & starts app on running emulator
+react-native run-android    # in the emulator, use CTRL-M & CTRL-R to switch hot-reloading & debug(http://localhost:8081/debugger-ui/)
 ```
 
 ## Redux
@@ -40,9 +40,53 @@ const mapDispatchToProps = dispatch => { /*...*/ }
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 ```
 
+## Build - (only for expo)
+These build-instructions are **only for expo-based ReactNative-Apps!** Normal react-native apps do not need any special treatments.
+```sh
+expo build:android  # take care: you need an online Expo user account!
+```
+```sh
+# create js bundle
+## setup:
+npm install     #maybe: npm install -g react-native-cli react-native-scripts
+# npm install react-native@0.59.1
+## call:
+react-native bundle --platform android --dev false --entry-file index.js --bundle-output _rena4android/app/src/main/assets/index.android.bundle --assets-dest _rena4android/app/src/main/res
+# android build with gradle:
+cd _rena4android
+./gradlew assembleDebug
+```
+```sh
+# setup: expo local
+npm install -g gulp --save
+npm install -g gulp gulp-shell gulp-cli isobject --save
+npm link gulp
+git checkout https://github.com/expo/expo in a local dir
+cd expo && npm install  # ...and pray!  # preferably on linux!
+cd expo/tools-public/ && npm install
+# call
+expo start
+cd ../expo
+#gulp android-shell-app --url http://localhost:19002/ --sdkVersion 29 --workingDir=../.
+#inside of project:
+gulp android-shell-app --url exp://10.0.75.1:19000 --sdkVersion 29 --workingDir=. --gulpfile ../expo/tools-public/gulpfile.js
+#inside of expo/tools-public/:
+gulp android-shell-app --url exp://10.0.75.1:19000 --sdkVersion 29 --workingDir=../../renaexp
+    # -> opens check-dynamic-macros-android.sh
+# iOS:
+# gulp ios-shell-app --action build --type [simulator or archive] --configuration [Debug or Release]
+```
+```sh
+expo detach
+```
+
 ## TODO:
-1. Login (HTTP-GET with response code 200)
-2. No Tab-Change if not logged in!
+* build prod apk
+* redux with HTTP(S) call
+* Login (HTTP-GET with response code 200)
+    * Services auf localhost kann man vom Android Virtual Device aufrufen unter der IP 10.0.2.2
+* No Tab-Change if not logged in!
+* solve npm install error "Error: Command failed: D:\projects\expoapp\client\reactnative\devenv\python\python.exe -c import sys; print "%s.%s.%s" % sys.version_info[:3]"
 
 ## Directory Structure
 <img src=_res/dir_structure.png width="450px">

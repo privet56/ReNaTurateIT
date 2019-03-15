@@ -11,7 +11,6 @@ import {
   Button,
   View,
 } from 'react-native';
-import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
@@ -91,11 +90,11 @@ export class HomeScreen extends React.Component
   }
 
   _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://www.google.com/');
+
   };
 
   _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync('https://www.google.com/');
+
   };
 
   onLogin = () => {
@@ -232,4 +231,4 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen); 

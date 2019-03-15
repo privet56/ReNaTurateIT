@@ -5,7 +5,7 @@ set "PATH=%~dp0..\devenv\python;%~dp0..\devenv\python\Scripts;%PATH%"
 set PYTHON=%~dp0..\devenv\python\python.exe
 
 rem needs Java >=8.x
-SET JAVA_HOME=%~dp0..\devenv\jdk1.8.0.win32
+SET JAVA_HOME=%~dp0..\devenv\jdk
 SET JAVA_OPTS=%JAVA_OPTS% -Xms1024M -Xmx1024M
 set JAVA_OPTIONS=%JAVA_OPTS%
 set _JAVA_OPTIONS=%JAVA_OPTS%
@@ -13,7 +13,7 @@ set _JAVA_OPTIONS=%JAVA_OPTS%
 set ANDROID_SDK_HOME=%~dp0..\devenv\androidsdk
 set ANDROID_HOME=%~dp0..\devenv\androidsdk
 set ANDROID_SDK_ROOT=%ANDROID_HOME%
-set GRADLE_HOME=%~dp0..\devenv\android\gradle\gradle-4.10.1
+set GRADLE_HOME=%~dp0..\devenv\android\gradle\gradle-5.2.1
 set ANT_EXECUTABLE=%~dp0..\devenv\apache-ant-1.9.5\bin\ant.bat
 rem SET ANDROID_NDK_HOME=c:\android\android-ndk-r10e-windows-x86
 

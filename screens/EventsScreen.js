@@ -1,6 +1,5 @@
 import React from 'react';
 import { ScrollView, View, Text, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
 
 import { connect } from 'react-redux';
 
@@ -23,7 +22,7 @@ export class EventsScreen extends React.Component {
         <View>
           <Text>Hello { this.props.un }!</Text>
         </View>
-        <ExpoLinksView />
+        
       </ScrollView>
     );
   }
@@ -52,4 +51,4 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventsScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(EventsScreen); 
