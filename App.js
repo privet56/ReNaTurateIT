@@ -8,9 +8,10 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import AppNavigator from './navigation/AppNavigator';
 import { Provider } from 'react-redux';
-import configureStore from './flux/store';
 
-const store = configureStore(); 
+//import configureStore from './flux/store';
+//const store = configureStore();
+import store from './flux/store';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -19,8 +20,11 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+import PropTypes from 'prop-types';
+
 type Props = {};
 export default class App extends Component<Props> {
+
   render() {
     return (<Provider store = { store }>
               <AppNavigator />

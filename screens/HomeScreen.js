@@ -17,16 +17,39 @@ import { MonoText } from '../components/StyledText';
 import { connect } from 'react-redux';
 import { setAuthData } from '../flux/actions/actions.auth';
 
+import store from '../flux/store';
+
+import PropTypes from 'prop-types';
+
 export class HomeScreen extends React.Component
 {
   constructor(props) {
     super(props);
-    this.state = {un:'', pwd:''};
+    this.handleAuthChange = this.handleAuthChange.bind(this);
+    this.state = {
+      un:''
+      , pwd:''
+      , unsubscribe: store.subscribe(this.handleAuthChange)
+    };
   }
 
   static navigationOptions = {
     header: null,
   };
+
+  handleAuthChange() {
+
+    console.log("handleAuthChange:args:"+JSON.stringify(arguments));
+    
+  }
+
+  componentWillUnmount() {
+    this.state.unsubscribe();
+  }
+
+  componentDidMount() {
+
+  }
 
   render() {
     return (
@@ -98,6 +121,7 @@ export class HomeScreen extends React.Component
   };
 
   onLogin = () => {
+    console.log("login! un:"+this.state.un);
     this.props.setAuth({un:this.state.un, pwd:this.state.pwd});  //set Redux state!
   };
 }
@@ -216,7 +240,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-
   return {
     un: state.un,
     pwd: state.pwd
@@ -225,10 +248,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    handleAuthChange: (dispatch) => {
+      console.log("mapDispatchToProps_onAuthDataChanged");
+    },
     setAuth: (authData) => {
       dispatch(setAuthData(authData));
     }
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen); 
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

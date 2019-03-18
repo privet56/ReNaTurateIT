@@ -21,3 +21,5 @@ const authDataReducer = (state = initialState, action) => {
 }
 
 export default authDataReducer;
+
+const getAuthDataChanged = state => state.un;

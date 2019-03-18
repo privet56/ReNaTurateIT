@@ -14,6 +14,7 @@ npm install
 ```sh
 startAndroidEmulator.bat
 react-native run-android    # in the emulator, use CTRL-M & CTRL-R to switch hot-reloading & debug(http://localhost:8081/debugger-ui/)
+adb logcat                  # look android logs
 ```
 
 ## Redux
@@ -39,6 +40,14 @@ const mapStateToProps = state => { /*...*/ }
 const mapDispatchToProps = dispatch => { /*...*/ }
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 ```
+
+## Advanced Redux
+#### How to log Redux?
+* Use the **redux-logger** middleware! (and watch in the Chrome debug/console window)
+#### How to handle async actions?
+* Use the **redux-promise** middleware! (alternatives: saga, thunk)
+#### How to convert data inside of reducers?
+* Use the **reselect** redux addon!
 
 ## Build - (only for expo)
 These build-instructions are **only for expo-based ReactNative-Apps!** Normal react-native apps do not need any special treatments.
