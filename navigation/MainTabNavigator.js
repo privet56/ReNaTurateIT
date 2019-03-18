@@ -10,9 +10,24 @@ import SettingsScreen from '../screens/SettingsScreen';
 import { connect } from 'react-redux';
 
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen,
-});
+const HomeStack = createStackNavigator(
+  {
+    Home: HomeScreen,
+  },
+  {
+    initialRouteName: 'Home',
+    /* The header config from HomeScreen is now here */
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: 'lightgreen',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
+  }
+);
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',

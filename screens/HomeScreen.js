@@ -40,9 +40,37 @@ export class HomeScreen extends React.Component
     };
   }
 
+
   static navigationOptions = {
-    header: null,
+    //header: <AppText>Home!</AppText>, //TODO: impl header control: [<- {title}  ]
+    title: 'Home',
   };
+
+  /*
+  static navigationOptions = {
+    //header: null,
+    title: 'Home',
+  };
+  * /
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam('myParam', 'Home'/*default value* /),
+      headerStyle: {
+        backgroundColor: 'lightgreen',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      /* Inside of render() 
+        <Button
+        title="Update the title"
+        onPress={() => this.props.navigation.setParams({otherParam: 'Updated!'})}
+      />
+      * /
+    };
+  };
+  */
 
   handleAuthChange(newState) {
 
@@ -71,12 +99,12 @@ export class HomeScreen extends React.Component
           <View style={styles.getStartedContainer}>
 
             {this._maybeRenderDevelopmentModeWarning()}
-            <AppText> ReNaTure!!!</AppText>{/*//TODO:use AppTitle*/}
+            {/*<AppTitle> ReNaTure! </AppTitle> //TODO:use AppTitle*/}
+            <AppText> Log Me In if you can! </AppText>
 
-
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
+            {/* <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
               <MonoText style={styles.codeHighlightText}>Log Me In if you can!</MonoText>
-            </View>
+            </View> */}
           </View>
 
           <TextInput style={styles.inp} value={this.state.un}
