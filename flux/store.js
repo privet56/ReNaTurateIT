@@ -1,6 +1,8 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import promiseMiddleware from 'redux-promise';
+import initSubscriber from 'redux-subscriber';
+
 import authDataReducer from './reducers/reducer.auth';
 
 const logger = createLogger(); 
@@ -15,4 +17,5 @@ const configureStore = () => {
 
 //export default configureStore;
 const store = configureStore();
+const subscribe = initSubscriber(store);
 export default store;

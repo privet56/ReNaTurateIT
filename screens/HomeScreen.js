@@ -14,8 +14,12 @@ import {
 
 import { MonoText } from '../components/StyledText';
 
+import { AppTitle } from '../components/AppTitle';
+import AppText from '../components/AppText';
+
 import { connect } from 'react-redux';
 import { setAuthData } from '../flux/actions/actions.auth';
+import { subscribe } from 'redux-subscriber';
 
 import store from '../flux/store';
 
@@ -29,7 +33,10 @@ export class HomeScreen extends React.Component
     this.state = {
       un:''
       , pwd:''
-      , unsubscribe: store.subscribe(this.handleAuthChange)
+      //, unsubscribe: store.subscribe(this.handleAuthChange) //=listens to the *whole* store!
+      , unsubscribe: subscribe('auth', state => {
+        this.handleAuthChange(state);
+      })
     };
   }
 
@@ -37,9 +44,9 @@ export class HomeScreen extends React.Component
     header: null,
   };
 
-  handleAuthChange() {
+  handleAuthChange(newState) {
 
-    console.log("handleAuthChange:args:"+JSON.stringify(arguments));
+    console.log("handleAuthChange:newState:"+JSON.stringify(newState));
     
   }
 
@@ -62,7 +69,10 @@ export class HomeScreen extends React.Component
           </View>
 
           <View style={styles.getStartedContainer}>
+
             {this._maybeRenderDevelopmentModeWarning()}
+            <AppText> ReNaTure!!!</AppText>{/*//TODO:use AppTitle*/}
+
 
             <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
               <MonoText style={styles.codeHighlightText}>Log Me In if you can!</MonoText>

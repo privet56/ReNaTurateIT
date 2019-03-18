@@ -48,6 +48,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 * Use the **redux-promise** middleware! (alternatives: saga, thunk)
 #### How to convert data inside of reducers?
 * Use the **reselect** redux addon!
+#### How to subscribe to changes in a *part* of redux state?
+* Use https://github.com/ivantsov/redux-subscriber
 
 ## Build - (only for expo)
 These build-instructions are **only for expo-based ReactNative-Apps!** Normal react-native apps do not need any special treatments.
