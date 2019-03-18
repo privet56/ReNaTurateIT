@@ -11,12 +11,12 @@ const AppTitle = ({ style, children }) => (
     {children}
   </AppText>
 );
-
+/*
 AppTitle.propTypes = {
   style: Text.propTypes.style,
   //children: PropTypes.node //temporarily deactivated because of >> Cannot read property 'node' of undefined
 };
-
+*/
 const styles = StyleSheet.create({
   title: {
     fontFamily: 'HelveticaNeue-CondensedBold',

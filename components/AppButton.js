@@ -23,7 +23,7 @@ const AppButton = ({ style, active, onPress, children, ...rest }) => (
     </Text>
   </TouchableOpacity>
 );
-
+/*
 AppButton.propTypes = {
   active: PropTypes.bool,
   style: View.propTypes.style,
@@ -34,7 +34,7 @@ AppButton.propTypes = {
 AppButton.defaultProps = {
   active: true
 };
-
+*/
 const styles = StyleSheet.create({
   button: {
     borderStyle: 'solid',

@@ -16,6 +16,8 @@ import { MonoText } from '../components/StyledText';
 
 import { AppTitle } from '../components/AppTitle';
 import AppText from '../components/AppText';
+import AppButton from '../components/AppButton';
+//import AppHeader from '../components/AppHeader';
 
 import { connect } from 'react-redux';
 import { setAuthData } from '../flux/actions/actions.auth';
@@ -40,10 +42,11 @@ export class HomeScreen extends React.Component
     };
   }
 
-
   static navigationOptions = {
-    //header: <AppText>Home!</AppText>, //TODO: impl header control: [<- {title}  ]
-    title: 'Home',
+    //header: <AppHeader>Home!</AppHeader>, //TODO: impl header control: [<- {title}  ]
+    headerLeft: <AppButton active={true} style={{marginLeft: 3}}>&lt;</AppButton>, 
+    headerTitle: <AppText style={{flex:1, fontWeight:'bold', textAlign: 'center', }}>Home!</AppText>, 
+    headerRight: <AppButton active={false} style={{marginLeft: 3}}>&gt;</AppButton>,
   };
 
   /*
@@ -126,9 +129,9 @@ export class HomeScreen extends React.Component
           </View>
         </ScrollView>
 
-        <View style={styles.tabBarInfoContainer}>
+        {/*<View style={styles.tabBarInfoContainer}>
           <Text style={styles.tabBarInfoText}>Navigation per Tabs is here:</Text>
-        </View>
+        </View>*/}
       
        </ImageBackground>
     );

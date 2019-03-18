@@ -16,15 +16,14 @@ const HomeStack = createStackNavigator(
   },
   {
     initialRouteName: 'Home',
-    /* The header config from HomeScreen is now here */
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: 'lightgreen',
+        backgroundColor: 'rgb(153,206,55)', 
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold',
-      },
+      }, 
     },
   }
 );
