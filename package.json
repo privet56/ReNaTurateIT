@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "runme": "react-native run-android"
   },
   "dependencies": {
+    "path": "^0.12.7",
     "react": "16.8.3",
     "react-native": "0.59.1",
     "react-native-gesture-handler": "^1.1.0",

@@ -20,7 +20,7 @@ import AppButton from '../components/AppButton';
 //import AppHeader from '../components/AppHeader';
 
 import { connect } from 'react-redux';
-import { setAuthData } from '../flux/actions/actions.auth';
+import { setAuthData, doLogin } from '../flux/actions/actions.auth';
 import { subscribe } from 'redux-subscriber';
 
 import store from '../flux/store';
@@ -31,13 +31,14 @@ export class HomeScreen extends React.Component
 {
   constructor(props) {
     super(props);
-    this.handleAuthChange = this.handleAuthChange.bind(this);
+    this.handleAuthDataChange = this.handleAuthDataChange.bind(this);
     this.state = {
       un:''
       , pwd:''
+      , errorMsg: 'Not (yet) logged in...'
       //, unsubscribe: store.subscribe(this.handleAuthChange) //=listens to the *whole* store!
       , unsubscribe: subscribe('auth', state => {
-        this.handleAuthChange(state);
+        this.handleAuthDataChange(state);
       })
     };
   }
@@ -75,10 +76,19 @@ export class HomeScreen extends React.Component
   };
   */
 
-  handleAuthChange(newState) {
+  handleAuthDataChange(newState)
+  {
+    this.setState(newState);
 
-    console.log("handleAuthChange:newState:"+JSON.stringify(newState));
-    
+    if(newState.auth.jwt === undefined)
+    {
+      console.log("handleAuthChange:->doLogin! (jwt:"+newState.auth.jwt+")");
+      this.props.doLogin({un:newState.auth.un, pwd:newState.auth.pwd});
+    }
+    else
+    {
+      console.log("handleAuthChange:->doNix! (jwt:"+newState.auth.jwt+", errorMsg:"+newState.auth.errorMsg+")");
+    }
   }
 
   componentWillUnmount() {
@@ -96,7 +106,7 @@ export class HomeScreen extends React.Component
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
             <Image style={styles.welcomeImage}
-              source={ __DEV__ ? require('../assets/images/springi.png') : require('../assets/images/springi.png') } />
+              source={ __DEV__ ? require('../assets/images/splash.png') : require('../assets/images/splash.png') } />
           </View>
 
           <View style={styles.getStartedContainer}>
@@ -126,11 +136,16 @@ export class HomeScreen extends React.Component
             <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
               <Text style={styles.helpLinkText}>Help...</Text>
             </TouchableOpacity>
+
+            <View style={styles.tabBarInfoContainer}>
+              <Text style={styles.tabBarErrorText}>{ this.state.errorMsg }</Text>
+            </View>
+
           </View>
         </ScrollView>
 
         {/*<View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>Navigation per Tabs is here:</Text>
+          <Text style={styles.tabBarErrorText}>{ this.state.errorMsg }</Text>
         </View>*/}
       
        </ImageBackground>
@@ -163,7 +178,7 @@ export class HomeScreen extends React.Component
 
   onLogin = () => {
     console.log("login! un:"+this.state.un);
-    this.props.setAuth({un:this.state.un, pwd:this.state.pwd});  //set Redux state!
+    this.props.setAuth({un:this.state.un, pwd:this.state.pwd, jwt:undefined, errorMsg: null });  //set Redux state!
   };
 }
 
@@ -194,7 +209,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 80,
     resizeMode: 'contain',
-    marginTop: 90,
+    marginTop: 30,
     marginLeft: -10,
   },
   getStartedContainer: {
@@ -219,10 +234,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   tabBarInfoContainer: {
+    /*
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
+    */
     ...Platform.select({
       ios: {
         shadowColor: 'black',
@@ -238,9 +255,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     paddingVertical: 20,
   },
-  tabBarInfoText: {
+  tabBarErrorText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    color:'red',
     textAlign: 'center',
   },
   navigationFilename: {
@@ -280,17 +297,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = state => {
+const mapStateToProps = storeState => {
+  
   return {
-    un: state.un,
-    pwd: state.pwd
+    //actually, currently not needed...
+    un: storeState.auth.un,
+    pwd: storeState.auth.pwd,
+    errorMsg: storeState.auth.errorMsg
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleAuthChange: (dispatch) => {
-      console.log("mapDispatchToProps_onAuthDataChanged");
+    doLogin: (authData) => {
+      dispatch(doLogin(authData));
     },
     setAuth: (authData) => {
       dispatch(setAuthData(authData));

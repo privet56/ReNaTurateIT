@@ -99,6 +99,10 @@ expo detach
 * No Tab-Change if not logged in!
 * solve npm install error "Error: Command failed: D:\projects\expoapp\client\reactnative\devenv\python\python.exe -c import sys; print "%s.%s.%s" % sys.version_info[:3]"
 
+## Gotchas
+* unexplainable build/execution errors?
+    * npm start -- --reset-cache
+
 ## Directory Structure
 <img src=_res/dir_structure.png width="450px">
 

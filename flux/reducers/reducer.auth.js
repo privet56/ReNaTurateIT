@@ -1,8 +1,11 @@
-import { AUTH_DATA_CHANGE } from '../actions/types';
+import { AUTH_LOGIN, AUTH_DATA_CHANGE } from '../actions/types';
+import { jsxOpeningElement } from '@babel/types';
 
 const initialState = {
   un: '',
-  pwd: ''
+  pwd: '',
+  errorMsg: null,
+  jwt: undefined
 };
 
 const authDataReducer = (state = initialState, action) => {
@@ -13,13 +16,20 @@ const authDataReducer = (state = initialState, action) => {
       return {
         ...state,
         un: action.payload.un,
-		    pwd: action.payload.pwd
+        pwd: action.payload.pwd,
+        errorMsg: action.payload.errorMsg,
+        jwt: action.payload.jwt
       };
-    default:
+    case AUTH_LOGIN:
+      console.log("reducer:"+JSON.stringify(action.payload));
+      return {
+        ...state,
+        jwt: action.payload.jwt ? action.payload.jwt : null,
+        errorMsg: action.payload.errorMsg ? action.payload.errorMsg : null,
+      };
+  default:
       return state;
   }
 }
 
 export default authDataReducer;
-
-const getAuthDataChanged = state => state.un;
