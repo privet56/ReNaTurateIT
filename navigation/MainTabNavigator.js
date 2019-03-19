@@ -6,13 +6,14 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import EventsScreen from '../screens/EventsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import HelpScreen from '../screens/HelpScreen';
 
 import { connect } from 'react-redux';
-
 
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
+    Help: HelpScreen
   },
   {
     initialRouteName: 'Home',
@@ -23,7 +24,7 @@ const HomeStack = createStackNavigator(
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold',
-      }, 
+      },
     },
   }
 );
