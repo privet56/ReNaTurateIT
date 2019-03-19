@@ -72,10 +72,6 @@ export class HomeScreen extends React.Component
     this.state.unsubscribe();
   }
 
-  componentDidMount() {
-
-  }
-
   render() {
     return (
       <ImageBackground source={require('../assets/images/spring-background-with-leaves.png') } style={{width: '100%', height: '100%'}}>

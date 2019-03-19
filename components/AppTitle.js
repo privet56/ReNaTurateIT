@@ -28,8 +28,15 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'HelveticaNeue-CondensedBold',
     fontSize: 18,
-    color: globalStyles.HEADER_TEXT_COLOR,
-    backgroundColor: `${globalStyles.BG_COLOR}99`
+    color: 'black',//globalStyles.HEADER_TEXT_COLOR,
+    backgroundColor: `${globalStyles.BG_COLOR}22`,
+    minWidth: 333,
+    minHeight: 44,
+    paddingTop: 7,
+    borderRadius: 19,
+    alignSelf: 'center',
+    justifyContent: 'center', 
+    textAlign: 'center'
   }
 });
 

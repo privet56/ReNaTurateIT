@@ -45,7 +45,7 @@ export class AppHeader extends React.Component
                     </Text>
                 </View>
 
-                { this.props.onPressLeft &&
+                { this.props.onPressRight &&
                 <TouchableOpacity
                     activeOpacity={this.props.onPressRight ? 0.7 : 1}
                     onPress={this.props.onPressRight}

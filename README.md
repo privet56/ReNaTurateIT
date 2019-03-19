@@ -111,3 +111,6 @@ expo detach
 
 ## Development Environment
 <img src=_res/devenv.png width="750px">
+
+## App in Action
+<img src=_res/renature.gif width="750px">
