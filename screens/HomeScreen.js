@@ -142,7 +142,7 @@ export class HomeScreen extends React.Component
               { this.state.errorMsg &&
                 <Text style={styles.tabBarErrorText}>{ this.state.errorMsg }</Text>
               }
-              { (this.state.accessingLoginServer || !this.state.accessingLoginServer) &&
+              { this.state.accessingLoginServer &&
                 <View style={{width: '100%', height: 33, backgroundColor:'transparent', textAlign: 'center'}}>
                   <ImageBackground source={require('../assets/images/loading.gif') } style={{width: 199, height: 33}}>
                     <Text style={[styles.tabBarInfoText, {color:'blue', textAlign: 'center'}]}>Accessing Login Server...</Text>
