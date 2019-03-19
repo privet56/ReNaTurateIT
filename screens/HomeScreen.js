@@ -17,7 +17,7 @@ import { MonoText } from '../components/StyledText';
 import { AppTitle } from '../components/AppTitle';
 import AppText from '../components/AppText';
 import AppButton from '../components/AppButton';
-//import AppHeader from '../components/AppHeader';
+import AppHeader from '../components/AppHeader';
 
 import { connect } from 'react-redux';
 import { setAuthData, doPromiseLogin, doLoginAndDispatch } from '../flux/actions/actions.auth';
@@ -44,38 +44,14 @@ export class HomeScreen extends React.Component
     };
   }
 
-  static navigationOptions = {
-    //header: <AppHeader>Home!</AppHeader>, //TODO: impl header control: [<- {title}  ]
-    headerLeft: <AppButton active={true} style={{marginLeft: 3}}>&lt;</AppButton>, 
-    headerTitle: <AppText style={{flex:1, fontWeight:'bold', textAlign: 'center', }}>Home!</AppText>, 
-    headerRight: <AppButton active={false} style={{marginLeft: 3}}>&gt;</AppButton>,
-  };
-
-  /*
-  static navigationOptions = {
-    //header: null,
-    title: 'Home',
-  };
-  * /
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.getParam('myParam', 'Home'/*default value* /),
-      headerStyle: {
-        backgroundColor: 'lightgreen',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-      /* Inside of render() 
-        <Button
-        title="Update the title"
-        onPress={() => this.props.navigation.setParams({otherParam: 'Updated!'})}
-      />
-      * /
-    };
+      header: <AppHeader>Home</AppHeader> //TODO: impl header control: [<- {title}  ]
+      //headerLeft: <AppButton active={true} style={{marginLeft: 3}}>&lt;</AppButton>, 
+      //headerTitle: <AppText style={{flex:1, fontWeight:'bold', textAlign: 'center', }}>Home!</AppText>, 
+      //headerRight: <AppButton active={false} style={{marginLeft: 3}}>&gt;</AppButton>,
+    }
   };
-  */
 
   handleAuthDataChange(newState)
   {

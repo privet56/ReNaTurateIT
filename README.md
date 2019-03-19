@@ -92,16 +92,19 @@ expo detach
 ```
 
 ## TODO:
-* build prod apk
-* redux with HTTP(S) call
+* Header as React.Component
 * Login (HTTP-GET with response code 200)
     * Services auf localhost kann man vom Android Virtual Device aufrufen unter der IP 10.0.2.2
-* No Tab-Change if not logged in!
-* solve npm install error "Error: Command failed: D:\projects\expoapp\client\reactnative\devenv\python\python.exe -c import sys; print "%s.%s.%s" % sys.version_info[:3]"
+* Hide Tab-Change if not logged in!
+* solve npm install error "Error: Command failed: D:\projects\renature\devenv\python\python.exe -c import sys; print "%s.%s.%s" % sys.version_info[:3]"
+* Speedup with **PureComponent**
+* Icon & Splash
+* Write Unit Tests with **import renderer from 'react-test-renderer';**
 
 ## Gotchas
 * unexplainable build/execution errors?
     * npm start -- --reset-cache
+    * close & deinstall app from emulator & close everything & cleanup %TEMP% + android/.gradle/* + android/app/build/*
 
 ## Directory Structure
 <img src=_res/dir_structure.png width="450px">
