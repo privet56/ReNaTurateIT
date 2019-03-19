@@ -1,22 +1,29 @@
 import React, { PropTypes } from 'react';
 import {
   StyleSheet,
-  Text
+  Text,
+  View
 } from 'react-native';
 import AppText from './AppText';
 import * as globalStyles from '../styles/global';
 
-const AppTitle = ({ style, children }) => (
-  <AppText style={[styles.title, style]}>
-    {children}
-  </AppText>
-);
-/*
+export class AppTitle extends React.Component
+{
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (<AppText style={[styles.title, this.props.style]}>
+      {this.props.children}
+    </AppText>);
+  }
+}
+
 AppTitle.propTypes = {
   style: Text.propTypes.style,
   //children: PropTypes.node //temporarily deactivated because of >> Cannot read property 'node' of undefined
 };
-*/
+
 const styles = StyleSheet.create({
   title: {
     fontFamily: 'HelveticaNeue-CondensedBold',

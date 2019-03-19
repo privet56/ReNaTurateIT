@@ -112,8 +112,8 @@ export class HomeScreen extends React.Component
 
           <View style={styles.getStartedContainer}>
 
-            {this._maybeRenderDevelopmentModeWarning()}
-            {/*<AppTitle> ReNaTure! </AppTitle> //TODO:use AppTitle*/}
+            {/*this._maybeRenderDevelopmentModeWarning()*/}
+            <AppTitle> ReNaTure! </AppTitle>
             <AppText> Log Me In if you can! </AppText>
 
             {/* <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
@@ -130,7 +130,7 @@ export class HomeScreen extends React.Component
           <View style={styles.helpContainer}>
 
             {/*<Button onPress={this.onLogin} title="Login?" style={styles.btn} accessibilityLabel="Login?" color="orange" />*/}
-            <TouchableOpacity onPress={this.onLogin} style={styles.btn}>
+            <TouchableOpacity activeOpacity={this.state.accessingLoginServer ? 1 : 0.7} onPress={this.state.accessingLoginServer ? null : this.onLogin} style={[styles.btn, {backgroundColor: this.state.accessingLoginServer ? '#f4ead2' : 'orange'}]} active={!this.state.accessingLoginServer}>
               <Text> Log me In! </Text>
             </TouchableOpacity>
 
