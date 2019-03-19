@@ -1,5 +1,4 @@
 import { AUTH_LOGIN, AUTH_DATA_CHANGE } from '../actions/types';
-import { jsxOpeningElement } from '@babel/types';
 
 const initialState = {
   un: '',
@@ -21,11 +20,19 @@ const authDataReducer = (state = initialState, action) => {
         jwt: action.payload.jwt
       };
     case AUTH_LOGIN:
-      console.log("reducer:"+JSON.stringify(action.payload));
+
+      if(action.payload.error) {//'error' returned by redux-promise in case of io error
+        return {
+          ...state,
+          jwt: null,
+          errorMsg: action.payload.result,
+        };  
+      }
+
       return {
         ...state,
-        jwt: action.payload.jwt ? action.payload.jwt : null,
-        errorMsg: action.payload.errorMsg ? action.payload.errorMsg : null,
+        jwt: action.payload.result.jwt ? action.payload.result.jwt : null,
+        errorMsg: action.payload.result.errorMsg ? action.payload.result.errorMsg : null,
       };
   default:
       return state;

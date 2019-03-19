@@ -20,7 +20,7 @@ import AppButton from '../components/AppButton';
 //import AppHeader from '../components/AppHeader';
 
 import { connect } from 'react-redux';
-import { setAuthData, doLogin } from '../flux/actions/actions.auth';
+import { setAuthData, doPromiseLogin, doLoginAndDispatch } from '../flux/actions/actions.auth';
 import { subscribe } from 'redux-subscriber';
 
 import store from '../flux/store';
@@ -78,16 +78,14 @@ export class HomeScreen extends React.Component
 
   handleAuthDataChange(newState)
   {
-    this.setState(newState);
+    if(!newState || !newState.auth) {
+      return;
+    }
+    this.setState(newState.auth);
 
     if(newState.auth.jwt === undefined)
     {
-      console.log("handleAuthChange:->doLogin! (jwt:"+newState.auth.jwt+")");
       this.props.doLogin({un:newState.auth.un, pwd:newState.auth.pwd});
-    }
-    else
-    {
-      console.log("handleAuthChange:->doNix! (jwt:"+newState.auth.jwt+", errorMsg:"+newState.auth.errorMsg+")");
     }
   }
 
@@ -310,7 +308,8 @@ const mapStateToProps = storeState => {
 const mapDispatchToProps = dispatch => {
   return {
     doLogin: (authData) => {
-      dispatch(doLogin(authData));
+      //dispatch(doPromiseLogin(authData));
+      doLoginAndDispatch(authData, dispatch)
     },
     setAuth: (authData) => {
       dispatch(setAuthData(authData));
