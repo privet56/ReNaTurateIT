@@ -7,6 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 import EventsScreen from '../screens/EventsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import HelpScreen from '../screens/HelpScreen';
+import AppTabBar from '../components/AppTabBar';
 
 import { connect } from 'react-redux';
 
@@ -29,20 +30,23 @@ const HomeStack = createStackNavigator(
   }
 );
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-  tabBarOptions:{
-    activeTintColor: "green",
+HomeStack.navigationOptions = ({ navigation }) => {
+  return {
+    tabBarLabel: 'Home',
+    //tabBarVisible: false, //works, but have to be done dynamically!
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+        focused={focused}
+        name={
+          Platform.OS === 'ios'
+            ? `ios-information-circle${focused ? '' : '-outline'}`
+            : 'md-information-circle'
+        }
+      />
+    ),
+    tabBarOptions:{
+      activeTintColor: "green",
+    }
   }
 };
 
@@ -77,11 +81,30 @@ SettingsStack.navigationOptions = {
   ),
   tabBarOptions:{
     activeTintColor: "green",
-  }
+  },
 };
 
-export default createBottomTabNavigator({
+const bottomTabNavigator = createBottomTabNavigator({
   HomeStack,
   EventsStack,
   SettingsStack,
+}, {
+  //tabBarComponent: AppTabBar,
+  tabBarComponent: (props) => <AppTabBar icons={[
+      Platform.OS === 'ios' ? `ios-information-circle` : 'md-information-circle',
+      Platform.OS === 'ios' ? 'ios-link' : 'md-link',
+      Platform.OS === 'ios' ? 'ios-options' : 'md-options']} {...props}></AppTabBar>,
+  tabBarOptions: {
+    activeTintColor: "#4F4F4F",
+    inactiveTintColor: "#ddd",
+    my: 'rhabarbera'
+  }
 });
+
+bottomTabNavigator.navigationOptions = ({ navigation }) => {
+  return {
+    tabBarVisible:false,
+  };
+};
+
+export default bottomTabNavigator;
