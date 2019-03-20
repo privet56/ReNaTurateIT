@@ -24,6 +24,8 @@ import { doSaveSettingsAndDispatch } from '../flux/actions/actions.settings';
 import { subscribe } from 'redux-subscriber';
 import store from '../flux/store';
 
+import { settingsInputData as defaultSettingsInputData } from '../cfg/cfg';
+
 import { COMMON_STYLES } from '../styles/global';
 
 export class SettingsScreen extends React.Component
@@ -49,25 +51,7 @@ export class SettingsScreen extends React.Component
       unsubscribe: subscribe('settings', state => {
         this.handleSettingsDataChange(state);
       }),
-      settingsInputData: { //TODO: query from server!
-        areaOfInterest : [
-          { label: 'BMW', value: 'bmw' },
-          { label: 'Siemens', value: 'siemens' },
-          { label: 'Daimler', value: 'daimler' },
-        ],
-        region : [
-          { label: 'EU', value: 'eu' },
-          { label: 'US', value: 'us' },
-          { label: 'RU', value: 'ru' },
-          { label: 'HU', value: 'hu' },
-          { label: 'GB', value: 'gb' },
-        ],
-        timeWindow : [
-          { label: '1 Month', value: '1month' },
-          { label: '2 Months', value: '2month' },
-          { label: '1 Year', value: '1year' },
-        ],
-      }
+      settingsInputData: defaultSettingsInputData,
     }
   }
   componentWillUnmount() {
