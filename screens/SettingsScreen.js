@@ -36,17 +36,38 @@ export class SettingsScreen extends React.Component
 
   constructor(props) {
     super(props);
+
     this.handleSettingsDataChange = this.handleSettingsDataChange.bind(this);
+
     this.state = {
       areaOfInterest: null,
       region: null,
       timeWindow: null,
       errorMsg: undefined,
-      infoMsg: 'Settings to be saved',
+      infoMsg: undefined,
       accessingServer: false,
       unsubscribe: subscribe('settings', state => {
         this.handleSettingsDataChange(state);
-      })
+      }),
+      settingsInputData: { //TODO: query from server!
+        areaOfInterest : [
+          { label: 'BMW', value: 'bmw' },
+          { label: 'Siemens', value: 'siemens' },
+          { label: 'Daimler', value: 'daimler' },
+        ],
+        region : [
+          { label: 'EU', value: 'eu' },
+          { label: 'US', value: 'us' },
+          { label: 'RU', value: 'ru' },
+          { label: 'HU', value: 'hu' },
+          { label: 'GB', value: 'gb' },
+        ],
+        timeWindow : [
+          { label: '1 Month', value: '1month' },
+          { label: '2 Months', value: '2month' },
+          { label: '1 Year', value: '1year' },
+        ],
+      }
     }
   }
   componentWillUnmount() {
@@ -80,6 +101,7 @@ export class SettingsScreen extends React.Component
   }
 
   render() {
+
     return (
       <ImageBackground source={require('../assets/images/spring-background-with-leaves.png') } style={{width: '100%', height: '100%'}}>
 
@@ -95,9 +117,11 @@ export class SettingsScreen extends React.Component
             selectedValue={this.state.areaOfInterest}
             onValueChange={(itemValue, itemIndex) => this.setState({areaOfInterest: itemValue})}>
               <Picker.Item label="[None]" value="" />
-              <Picker.Item label="BMW" value="bmw" />
-              <Picker.Item label="Siemens" value="siemens" />
-              <Picker.Item label="Daimler" value="daimler" />
+              {
+                this.state.settingsInputData.areaOfInterest.map((itemValue, itemIndex) => {
+                   return <Picker.Item label={itemValue.label} value={itemValue.value} /> 
+                })
+              }
           </Picker>
         </View>
         {/*Region*/}
@@ -108,10 +132,11 @@ export class SettingsScreen extends React.Component
             selectedValue={this.state.region}
             onValueChange={(itemValue, itemIndex) => this.setState({region: itemValue})}>
             <Picker.Item label="[None]" value="" />
-            <Picker.Item label="EU" value="eu" />
-            <Picker.Item label="US" value="us" />
-            <Picker.Item label="GB" value="gb" />
-            <Picker.Item label="RU" value="ru" />
+            {
+                this.state.settingsInputData.region.map((itemValue, itemIndex) => {
+                   return <Picker.Item label={itemValue.label} value={itemValue.value} /> 
+                })
+              }
           </Picker>
         </View>
         {/*TimeWindow*/}
@@ -122,9 +147,11 @@ export class SettingsScreen extends React.Component
             selectedValue={this.state.region}
             onValueChange={(itemValue, itemIndex) => this.setState({region: itemValue})}>
             <Picker.Item label="[None]" value="" />
-            <Picker.Item label="1 Month" value="1month" />
-            <Picker.Item label="2 Months" value="2month" />
-            <Picker.Item label="1 Year" value="1year" />
+            {
+                this.state.settingsInputData.timeWindow.map((itemValue, itemIndex) => {
+                   return <Picker.Item label={itemValue.label} value={itemValue.value} /> 
+                })
+            }
           </Picker>
         </View>
 
