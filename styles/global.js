@@ -21,7 +21,12 @@ export const COMMON_STYLES = StyleSheet.create({
   text: {
     color: TEXT_COLOR,
     ...TEXT_STYLE
-  }
+  },
+  errorText: {
+    fontSize: 17,
+    color:'red',
+    textAlign: 'center',
+  },
 });
 
 import { Dimensions } from 'react-native';

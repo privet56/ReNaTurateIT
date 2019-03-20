@@ -42,14 +42,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 ```
 
 ## Advanced Redux
-#### How to log Redux?
-* Use the **redux-logger** middleware! (and watch in the Chrome debug/console window)
-#### How to handle async actions?
-* Use the **redux-promise** middleware! (alternatives: saga, thunk)
-#### How to convert data inside of reducers?
-* Use the **reselect** redux addon!
-#### How to subscribe to changes in a *part* of redux state?
-* Use https://github.com/ivantsov/redux-subscriber
+Q: How to log Redux?<br/>
+A: Use the **redux-logger** middleware! (and watch in the Chrome debug/console window)
+
+Q: How to handle async actions?<br/>
+A: Use the **redux-promise** middleware! (alternatives: saga, thunk)
+
+Q: How to convert data inside of reducers?<br/>
+A: Use the **reselect** redux addon!
+
+A: How to subscribe to changes in a *part* of redux state?<br/>
+Q: Use https://github.com/ivantsov/redux-subscriber
 
 ## Build - (only for expo)
 These build-instructions are **only for expo-based ReactNative-Apps!** Normal react-native apps do not need any special treatments.
@@ -92,7 +95,6 @@ expo detach
 ```
 
 ## TODO:
-* Header as React.Component
 * Login (HTTP-GET with response code 200)
     * Services auf localhost kann man vom Android Virtual Device aufrufen unter der IP 10.0.2.2
 * Hide Tab-Change if not logged in!
@@ -100,6 +102,7 @@ expo detach
 * Speedup with **PureComponent**
 * Icon & Splash
 * Write Unit Tests with **import renderer from 'react-test-renderer';**
+* Async actions: use better thunk/saga instead of redux-promise?
 
 ## Gotchas
 * unexplainable build/execution errors?
