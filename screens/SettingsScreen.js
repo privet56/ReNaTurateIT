@@ -103,7 +103,7 @@ export class SettingsScreen extends React.Component
               <Picker.Item label="[None]" value="" />
               {
                 this.state.settingsInputData.areaOfInterest.map((itemValue, itemIndex) => {
-                   return <Picker.Item label={itemValue.label} value={itemValue.value} /> 
+                   return <Picker.Item label={itemValue.label} value={itemValue.value} key={itemValue.value} /> 
                 })
               }
           </Picker>
@@ -118,7 +118,7 @@ export class SettingsScreen extends React.Component
             <Picker.Item label="[None]" value="" />
             {
                 this.state.settingsInputData.region.map((itemValue, itemIndex) => {
-                   return <Picker.Item label={itemValue.label} value={itemValue.value} /> 
+                   return <Picker.Item label={itemValue.label} value={itemValue.value} key={itemValue.value} /> 
                 })
               }
           </Picker>
@@ -133,7 +133,7 @@ export class SettingsScreen extends React.Component
             <Picker.Item label="[None]" value="" />
             {
                 this.state.settingsInputData.timeWindow.map((itemValue, itemIndex) => {
-                   return <Picker.Item label={itemValue.label} value={itemValue.value} /> 
+                   return <Picker.Item label={itemValue.label} value={itemValue.value} key={itemValue.value} /> 
                 })
             }
           </Picker>

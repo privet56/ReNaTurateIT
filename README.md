@@ -117,3 +117,6 @@ expo detach
 
 ## App in Action
 <img src=_res/renature.gif width="750px">
+
+#### App without Network Access:
+<img src=_res/renature.settings.gif>
