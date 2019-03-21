@@ -54,6 +54,9 @@ A: Use the **reselect** redux addon!
 A: How to subscribe to changes in a *part* of redux state?<br/>
 Q: Use https://github.com/ivantsov/redux-subscriber
 
+A: Do I have alternative flux implementations?<br/>
+Q: Best known alternatives to redux: reflux, mobx
+
 ## Build - (only for expo)
 These build-instructions are **only for expo-based ReactNative-Apps!** Normal react-native apps do not need any special treatments.
 ```sh
@@ -120,3 +123,5 @@ expo detach
 <img src=_res/renature.settings.gif>
 <img src=_res/renature.tabbarani.gif>
 
+## Project structure:
+<img src=_res/project.structure.png>
