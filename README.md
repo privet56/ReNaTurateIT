@@ -115,8 +115,8 @@ expo detach
 ## Development Environment
 <img src=_res/devenv.png width="750px">
 
-## App in Action
+## App in Action (without network access!)
 <img src=_res/renature.gif width="750px">
-
-#### App without Network Access:
 <img src=_res/renature.settings.gif>
+<img src=_res/renature.tabbarani.gif>
+
