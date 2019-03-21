@@ -18,6 +18,7 @@ import {
   ImageBackground,
   TextInput,
   Button,
+  Animated, Easing,
   View,
 } from 'react-native';
 
@@ -38,30 +39,48 @@ import PropTypes from 'prop-types';
 class AppTabBar extends React.Component
 {
     displayName = "AppTabBar";
+    minHeight = 0;
+    maxHeight = 40;
 
     constructor(props)
     {
         super(props);
+        this.state = {
+            height:new Animated.Value(this.minHeight),
+            unsubscribe: subscribe('auth.jwt', storeState => {
+
+                //this.setState({ height: storeState.auth.jwt ? this.maxHeight : this.minHeight });
+
+                Animated.spring(this.state.height, {
+                    toValue: storeState.auth.jwt ? this.maxHeight : this.minHeight,
+                    duration: 1999,
+                    useNativeDriver: false,//Style property height is not supported by native animated module
+                    easing: Easing.bounce,
+                    delay: 9
+                }).start();
+              }),
+         };
         this.navigationHandler = this.navigationHandler.bind(this);
     }
 
+    componentWillUnmount() {
+        this.state.unsubscribe();
+    }
+
     navigationHandler = (routeName) => {
-        console.log("Pressed!!! " +routeName);
-        console.log(routeName);
        this.props.navigation.navigate(routeName);
     }
 
-    render() {
+    render()
+    {
+      const {navigation, icons} = this.props;
+
+      const routes = navigation.state.routes;// a navigator component receives a routes object, which holds all the routes of your tab bar
   
-      const {navigation, needHide, icons} = this.props;
-      // a navigator component receives a routes object, which holds all the routes of your tab bar
-      const routes = navigation.state.routes;
-  
-      if (needHide) {
-        return <View/>;
-      };
+      //if (!this.state.isVisible) { return <View/>; }; 
       
       return (
+        <Animated.View style={{height: this.state.height}}>
         <SafeAreaView>
           <View style={styles.container}>
             {routes.map((route, index) => {
@@ -82,6 +101,7 @@ class AppTabBar extends React.Component
             })}
           </View> 
         </SafeAreaView>
+        </Animated.View>
       );
     }
 }

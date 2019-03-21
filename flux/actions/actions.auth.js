@@ -17,25 +17,26 @@ export const setLoginData = authLoginData => {
 export const doLoginAndDispatch = (authData, dispatch) => {
   const url = `${expoBackendUrl}?un=${authData.un}&pwd=${authData.pwd}`;
   const req = fetch(url);
+  const errorjwt = global.__DEV__ ? 'dummyjwt' : null;
   req.then(res => {
     try {
       resjson = res.json();
       if(!resjson || !resjson.jwt)
       {
         console.log("actions:doLoginAndDispatch:ERROR:Internal Server Error   url:"+url);
-        return dispatch(setLoginData({ result:{jwt:null, errorMsg: "Internal Server Error" }}));
+        return dispatch(setLoginData({ result:{jwt:errorjwt, errorMsg: "Internal Server Error" }}));
       }
       //console.log("actions:doLoginAndDispatch:SUCCESS: un:"+authData.un+" => jwt:"+resjson.jwt);
       return dispatch(setLoginData({ result:{jwt:resjson.jwt, errorMsg: null }}));
     }
     catch(e) {
       console.log("actions:doLoginAndDispatch:ERROR:invalid Server response   url:"+url);
-      return dispatch(setLoginData({ result:{jwt:null, errorMsg: "Invalid Server Response" }}));
+      return dispatch(setLoginData({ result:{jwt:errorjwt, errorMsg: "Invalid Server Response" }}));
     }
   }).catch(err => {
     console.log("actions:doLoginAndDispatch:catch - ERROR:>"+err+"<   url:"+url);
-    return dispatch(setLoginData({ result:{jwt:null, errorMsg:`Server Error:${err}` }}));
-  });
+    return dispatch(setLoginData({ result:{jwt:errorjwt, errorMsg:`Server Error:${err}` }}));
+  }).done();
 }
 
 export const doPromiseLogin = (authData) => {
