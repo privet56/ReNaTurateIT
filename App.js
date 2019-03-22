@@ -9,6 +9,8 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 import AppNavigator from './navigation/AppNavigator';
 import { Provider } from 'react-redux';
 
+import SplashScreen from 'react-native-splash-screen';
+
 //import configureStore from './flux/store';
 //const store = configureStore();
 import store from './flux/store';
@@ -24,6 +26,10 @@ import PropTypes from 'prop-types';
 
 type Props = {};
 export default class App extends Component<Props> {
+
+  componentDidMount() {
+    SplashScreen.hide()
+  }
 
   render() {
     return (<Provider store = { store }>

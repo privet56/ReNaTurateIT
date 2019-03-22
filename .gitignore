@@ -54,3 +54,7 @@ buck-out/
 
 # Bundle artifact
 *.jsbundle
+
+android/app/build/
+android/app/src/debug/
+android/app/src/release/

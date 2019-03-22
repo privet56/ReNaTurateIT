@@ -57,6 +57,14 @@ Q: Use https://github.com/ivantsov/redux-subscriber
 A: Do I have alternative flux implementations?<br/>
 Q: Best known alternatives to redux: reflux, mobx
 
+## Build - (for android, plain react-native app, without expo)
+run these commands:
+```sh
+react-native bundle --platform android --dev true --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/
+
+cd android
+./gradlew assembleDebug
+```
 ## Build - (only for expo)
 These build-instructions are **only for expo-based ReactNative-Apps!** Normal react-native apps do not need any special treatments.
 ```sh
@@ -100,7 +108,6 @@ expo detach
 ## TODO:
 * Login (HTTP-GET with response code 200)
     * Services auf localhost kann man vom Android Virtual Device aufrufen unter der IP 10.0.2.2
-* Hide Tab-Change if not logged in!
 * solve npm install error "Error: Command failed: D:\projects\renature\devenv\python\python.exe -c import sys; print "%s.%s.%s" % sys.version_info[:3]"
 * Speedup with **PureComponent**
 * Icon & Splash

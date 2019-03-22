@@ -155,8 +155,8 @@ export class HomeScreen extends React.Component
   };
 
   _handleHelpPress = () => {
-    //const {navigate} = this.props.navigation;
-    //navigate('Help', {origin: 'Home'});
+    const {navigate} = this.props.navigation;
+    navigate('Help', {origin: 'Home'});
   };
 
   onLogin = () => {
