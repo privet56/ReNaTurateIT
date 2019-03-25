@@ -113,6 +113,7 @@ expo detach
 * Icon & Splash
 * Write Unit Tests with **import renderer from 'react-test-renderer';**
 * Async actions: use better thunk/saga instead of redux-promise?
+* Use <KeyboardAvoidingView ...> around inputs
 
 ## Gotchas
 * unexplainable build/execution errors?

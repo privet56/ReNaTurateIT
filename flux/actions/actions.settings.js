@@ -12,6 +12,7 @@ export const doSaveSettingsAndDispatch = (settingsData, jwt, dispatch) => {
   const url = `${expoBackendUrl}?region=${settingsData.region}&timewindow=${settingsData.timeWindow}&areaofinterest=${settingsData.areaOfInterest}&jwt=${jwt}`;
   var data = new FormData();
   data.append( "json", JSON.stringify({...settingsData, jwt}));
+  //TODO: use asyn/await for better readability
   const req = fetch(url,
     {
         headers: {

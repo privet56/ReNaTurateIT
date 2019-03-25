@@ -77,7 +77,7 @@ class AppTabBar extends React.Component
 
       const routes = navigation.state.routes;// a navigator component receives a routes object, which holds all the routes of your tab bar
   
-      //if (!this.state.isVisible) { return <View/>; }; 
+      //TODO: check if better to use View.collapsed instead of height-animation!?
       
       return (
         <Animated.View style={{height: this.state.height}}>

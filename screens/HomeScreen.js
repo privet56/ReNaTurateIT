@@ -93,6 +93,7 @@ export class HomeScreen extends React.Component
             </View> */}
           </View>
 
+          {/* //TODO: use <KeyboardAvoidingView ...> */}
           <TextInput style={styles.inp} value={this.state.un}
             onChangeText={(un) => this.setState({un})} placeholder="username" />
           <TextInput style={styles.inp} value={this.state.pwd} secureTextEntry={true}
