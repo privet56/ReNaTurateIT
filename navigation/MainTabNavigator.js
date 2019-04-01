@@ -5,6 +5,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import EventsScreen from '../screens/EventsScreen';
+import EventDetailsScreen from '../screens/EventDetailsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import HelpScreen from '../screens/HelpScreen';
 import AppTabBar from '../components/AppTabBar';
@@ -50,9 +51,12 @@ HomeStack.navigationOptions = ({ navigation }) => {
   }
 };
 
-const EventsStack = createStackNavigator({
-  Events: EventsScreen,
-});
+const EventsStack = createStackNavigator(
+  {
+    Events: EventsScreen,
+    EventDetails: EventDetailsScreen
+  }
+);
 
 EventsStack.navigationOptions = {
   tabBarLabel: 'Events',
