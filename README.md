@@ -1,16 +1,19 @@
 # ReNa-TurateIT
-A React-Native App with Redux State-Management
+A React-Native App with Redux State-Management<br>
+## Documentation: 
+* General **development environment** setup description: [docs/HowTo-WorkWithReactNative.md](docs/HowTo-WorkWithReactNative.md)<br>
+* Project **structure** description: [docs/AppStructure.md](docs/AppStructure.md)<br>
 
-## Init React Native Project:
+## **Init** a React Native Project:
 ```sh
-NO: npm install -g expo-cli
-NO: expo init renaexp .
+# npm install -g expo-cli # would apply for an expo-baed app, we don't use it!
+# expo init renaexp .     # would apply for an expo-baed app, we don't use it!
 npm install -g react-native-cli
 react-native init renaexp
 npm install
 ```
 
-## Start App
+## **Start** the App
 ```sh
 startAndroidEmulator.bat
 react-native run-android    # in the emulator, use CTRL-M & CTRL-R to switch hot-reloading & debug(http://localhost:8081/debugger-ui/)
@@ -67,9 +70,11 @@ cd android
 ```
 ## Build - (only for expo)
 These build-instructions are **only for expo-based ReactNative-Apps!** Normal react-native apps do not need any special treatments.
+#### Build in the cloud (expo-account necessary)
 ```sh
 expo build:android  # take care: you need an online Expo user account!
 ```
+#### cloud-circumvented build of an expo app (inofficial solution)
 ```sh
 # create js bundle
 ## setup:
@@ -81,6 +86,7 @@ react-native bundle --platform android --dev false --entry-file index.js --bundl
 cd _rena4android
 ./gradlew assembleDebug
 ```
+#### cloud-circumvented build of an expo app (official but not well supported solution)
 ```sh
 # setup: expo local
 npm install -g gulp --save
@@ -101,6 +107,7 @@ gulp android-shell-app --url exp://10.0.75.1:19000 --sdkVersion 29 --workingDir=
 # iOS:
 # gulp ios-shell-app --action build --type [simulator or archive] --configuration [Debug or Release]
 ```
+#### do-it-yourself build with target-system-tools, after detaching the project 
 ```sh
 expo detach
 ```
@@ -109,11 +116,12 @@ expo detach
 * Login (HTTP-GET with response code 200)
     * Services auf localhost kann man vom Android Virtual Device aufrufen unter der IP 10.0.2.2
 * solve npm install error "Error: Command failed: D:\projects\renature\devenv\python\python.exe -c import sys; print "%s.%s.%s" % sys.version_info[:3]"
-* Speedup with **PureComponent**
-* Icon & Splash
+    * possible solution: set path for python in the correct way
+* Speedup with **PureComponent** instead of React.Component. Details: [https://reactjs.org/docs/react-api.html#reactpurecomponent](https://reactjs.org/docs/react-api.html#reactpurecomponent)
+* Design target-specific Icon & Splash
 * Write Unit Tests with **import renderer from 'react-test-renderer';**
-* Async actions: use better thunk/saga instead of redux-promise?
-* Use <KeyboardAvoidingView ...> around inputs
+* implement **Async** flux-actions: use better **thunk**/saga instead of redux-promise
+* Use &lt;KeyboardAvoidingView ...&gt; around inputs
 
 ## Gotchas
 * unexplainable build/execution errors?
