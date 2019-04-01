@@ -22,13 +22,13 @@ adb logcat                  # look android logs
 ```js
 // implementation:
 ./flux/store, ./flux/actions/{star}.js, ./flux/reducers/{star}.js
-
+//
 //usage: App.js
 import configureStore from './flux/store';
 const store = configureStore();
 // render App with store provider:
 <Provider store = { store }>
-
+//
 //usage in components 
 ////A: imports:
 import { connect } from 'react-redux';
