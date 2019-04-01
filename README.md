@@ -21,14 +21,14 @@ adb logcat                  # look android logs
 > $ npm install redux react-redux --save
 ```js
 // implementation:
-./flux/store, ./flux/actions/+.js, ./flux/reducers/+.js
-
+./flux/store, ./flux/actions/{star}.js, ./flux/reducers/{star}.js
+//
 //usage: App.js
 import configureStore from './flux/store';
 const store = configureStore();
 // render App with store provider:
 <Provider store = { store }>
-
+//
 //usage in components 
 ////A: imports:
 import { connect } from 'react-redux';
