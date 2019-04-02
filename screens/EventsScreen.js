@@ -3,6 +3,7 @@ import {ActivityIndicator, Alert, Button, FlatList, ImageBackground, ScrollView,
 import { EVENTS_STYLES, HEADER_COLOR } from '../styles/events';
 
 import { connect } from 'react-redux';
+import { expoBackendUrl } from '../cfg/cfg';
 
 export class EventsScreen extends React.Component {
 
@@ -70,8 +71,10 @@ export class EventsScreen extends React.Component {
 
     //this.setState({ isLoading: true }); - leads to initial screen wipe
     try {
-      const response = await fetch('http://10.0.2.2:8080/v007/event'); //get all events
-      //const response = await fetch('http://10.0.2.2:8080/v007/event?startDate=1980-01-01&endDate=2019-01-01'); //get all events by date
+      const url = `${expoBackendUrl}/event`; //get all events
+      //const url = `${expoBackendUrl}/event?startDate=1980-01-01&endDate=2019-01-01`; //get all events by date
+      //const response = await fetch('http://10.0.2.2:8080/v007/event');
+      const response = await fetch(url);
       const responseJson = await response.json();
       this.setState({
         isLoading: false,
