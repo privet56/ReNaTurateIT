@@ -2,13 +2,24 @@ import React from 'react';
 import {ActivityIndicator, Alert, Button, FlatList, ImageBackground, ScrollView, Text, TouchableHighlight, View} from 'react-native';
 import { EVENTS_STYLES, HEADER_COLOR } from '../styles/events';
 
+import { AppTitle } from '../components/AppTitle';
+import AppText from '../components/AppText';
+import AppHeader from '../components/AppHeader';
+import AppButton from '../components/AppButton';
+import AppLoading from '../components/AppLoading';
+
 import { connect } from 'react-redux';
 import { expoBackendUrl } from '../cfg/cfg';
 
 export class EventsScreen extends React.Component {
 
-  static navigationOptions = {
-    title: 'Events',
+  static navigationOptions = ({ navigation }) => {
+    return {
+      //TODO: + icon for onPressRight->CreateNewEvent
+      header: <AppHeader onPressRight={() => {
+        navigation.navigate('EventCreate', {origin: 'Events'});
+      }}>Events</AppHeader>
+    }
   };
 
   state = {

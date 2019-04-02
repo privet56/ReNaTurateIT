@@ -5,6 +5,7 @@ import initSubscriber from 'redux-subscriber';
 
 import authDataReducer from './reducers/reducer.auth';
 import settingsDataReducer from './reducers/reducer.settings';
+import eventDataReducer from './reducers/reducer.event';
 
 const logger = createLogger();
 const middleWare = global.__DEV__ ? [/*logger, */promiseMiddleware] : [promiseMiddleware];
@@ -12,6 +13,7 @@ const middleWare = global.__DEV__ ? [/*logger, */promiseMiddleware] : [promiseMi
 const rootReducer = combineReducers({
   auth: authDataReducer,
   settings: settingsDataReducer,
+  event: eventDataReducer,
 });
 
 const configureStore = () => {
