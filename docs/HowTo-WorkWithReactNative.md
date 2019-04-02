@@ -40,7 +40,7 @@ and only then
 ## Set up the initial ExpoApp React Native work project
 
 1. Fetch the starter project from GIT using the repository url
-git@git.{yourcompany}.com:NAGEXPAP/starter-projects/react-native/react-native-starter.git
+git@git.{yourcompany}.com:{yourappname}/starter-projects/react-native/react-native-starter.git
 
 2. Install the necessary runtime libraries  
 - navigate to the top-level folder of the locally created project and execute

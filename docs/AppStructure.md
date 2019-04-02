@@ -53,3 +53,18 @@ Contains the sources for app-wide available styles (partly separated for each ta
 * **package-lock.json** lists the **exact** used library versions
 * **package.json** is the central node/npm project file, listing the project attributes, (start-)commands and its dependencies
 
+# Plugins
+Following 3rd-party plugins are used in the app:
+* **react-native-splash-screen** (incl. native components): builds a Splash screen while js-app is loading
+* **react-native-vector-icons** (incl. native components): offers a standardized iconset
+* **react-navigation**: pure JavaScript plugins for Tab-/Stack-/Drawer navigation components
+* **redux** (pure JavaScript implementation of the flux-architecture) with 
+    * **react-redux**: Redux for React
+    * **redux-logger**: allows the logging of the set Actions (see [../flux/store.js](../flux/store.js))
+    * **redux-promise**: support for Async Actions
+    * **redux-subscriber**: support for Notifications after partical store change
+* **react-test-renderer** (pure JavaScript implementation) allows the virtual rendering of react-native components
+
+**Pure** JavaScript-Plugins are immediately useable after an *npm install*.<br>
+Plugins with **native** components are only useable after changing the native platform-specific code, automatically done by the call:
+> $ react-native link
