@@ -68,6 +68,45 @@ react-native bundle --platform android --dev true --entry-file index.js --bundle
 cd android
 ./gradlew assembleDebug
 ```
+
+## Build a react-native app in a docker container (in a CI/CD pipeline)
+Description: [./build/build.md](./build/build.md)
+
+## TODO:
+* Login (HTTP-GET with response code 200)
+    * Services auf localhost kann man vom Android Virtual Device aufrufen unter der IP 10.0.2.2
+* solve npm install error "Error: Command failed: D:\projects\renature\devenv\python\python.exe -c import sys; print "%s.%s.%s" % sys.version_info[:3]"
+    * possible solution: set path for python in the correct way
+* Speedup with **PureComponent** instead of React.Component. Details: [https://reactjs.org/docs/react-api.html#reactpurecomponent](https://reactjs.org/docs/react-api.html#reactpurecomponent)
+* Design target-specific Icon & Splash
+* Write Unit Tests with **import renderer from 'react-test-renderer';**
+* implement **Async** flux-actions: use better **thunk**/saga instead of redux-promise
+* Use &lt;KeyboardAvoidingView ...&gt; around inputs
+
+## Gotchas
+* unexplainable build/execution errors?
+    * npm start -- --reset-cache
+    * close & deinstall app from emulator & close everything & cleanup %TEMP% + android/.gradle/* + android/app/build/*
+
+## Directory Structure
+<img src=_res/dir_structure.png width="450px">
+
+## Development Environment
+<img src=_res/devenv.png width="750px">
+
+## App in Action (without network access!)
+<img src=_res/renature.gif width="750px">
+<img src=_res/renature.settings.gif>
+<img src=_res/renature.tabbarani.gif>
+
+## Project structure:
+<img src=_res/project.structure.png>
+
+
+
+
+
+
 ## Build - (only for expo)
 These build-instructions are **only for expo-based ReactNative-Apps!** Normal react-native apps do not need any special treatments.
 #### Build in the cloud (expo-account necessary)
@@ -111,33 +150,3 @@ gulp android-shell-app --url exp://10.0.75.1:19000 --sdkVersion 29 --workingDir=
 ```sh
 expo detach
 ```
-
-## TODO:
-* Login (HTTP-GET with response code 200)
-    * Services auf localhost kann man vom Android Virtual Device aufrufen unter der IP 10.0.2.2
-* solve npm install error "Error: Command failed: D:\projects\renature\devenv\python\python.exe -c import sys; print "%s.%s.%s" % sys.version_info[:3]"
-    * possible solution: set path for python in the correct way
-* Speedup with **PureComponent** instead of React.Component. Details: [https://reactjs.org/docs/react-api.html#reactpurecomponent](https://reactjs.org/docs/react-api.html#reactpurecomponent)
-* Design target-specific Icon & Splash
-* Write Unit Tests with **import renderer from 'react-test-renderer';**
-* implement **Async** flux-actions: use better **thunk**/saga instead of redux-promise
-* Use &lt;KeyboardAvoidingView ...&gt; around inputs
-
-## Gotchas
-* unexplainable build/execution errors?
-    * npm start -- --reset-cache
-    * close & deinstall app from emulator & close everything & cleanup %TEMP% + android/.gradle/* + android/app/build/*
-
-## Directory Structure
-<img src=_res/dir_structure.png width="450px">
-
-## Development Environment
-<img src=_res/devenv.png width="750px">
-
-## App in Action (without network access!)
-<img src=_res/renature.gif width="750px">
-<img src=_res/renature.settings.gif>
-<img src=_res/renature.tabbarani.gif>
-
-## Project structure:
-<img src=_res/project.structure.png>
