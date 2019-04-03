@@ -72,7 +72,6 @@ RUN cd ~ && mkdir ~/.android && echo '### User Sources for Android SDK Manager' 
         "system-images;android-19;google_apis;armeabi-v7a" \
         "extras;android;m2repository"
 
-
 # gradle
 RUN apt-get update
 RUN apt install wget
