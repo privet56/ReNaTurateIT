@@ -27,6 +27,13 @@ export const COMMON_STYLES = StyleSheet.create({
     color:'red',
     textAlign: 'center',
   },
+  inp: {
+    height: 33, borderColor: 'lightgray', borderWidth: 1, marginRight: 9, marginLeft: 9, padding: 9, marginTop: 11,
+    width: '95%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white'
+  },
 });
 
 import { Dimensions } from 'react-native';

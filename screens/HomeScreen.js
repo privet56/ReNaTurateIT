@@ -27,6 +27,8 @@ import store from '../flux/store';
 
 import PropTypes from 'prop-types';
 
+import { COMMON_STYLES } from '../styles/global';
+
 export class HomeScreen extends React.Component
 {
   constructor(props) {
@@ -94,9 +96,9 @@ export class HomeScreen extends React.Component
           </View>
 
           {/* //TODO: use <KeyboardAvoidingView ...> */}
-          <TextInput style={styles.inp} value={this.state.un}
+          <TextInput style={COMMON_STYLES.inp} value={this.state.un}
             onChangeText={(un) => this.setState({un})} placeholder="username" />
-          <TextInput style={styles.inp} value={this.state.pwd} secureTextEntry={true}
+          <TextInput style={COMMON_STYLES.inp} value={this.state.pwd} secureTextEntry={true}
             onChangeText={(pwd) => this.setState({pwd})} placeholder="password" />
 
 
@@ -185,9 +187,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 20,
-  },
-  inp: {
-    height: 33, borderColor: 'lightgray', borderWidth: 1, marginRight: 9, marginLeft: 9, padding: 9, marginTop: 11,
   },
   welcomeImage: {
     width: 100,

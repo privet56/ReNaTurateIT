@@ -38,8 +38,11 @@ export class EventCreateScreen extends React.Component
     }
   };
 
-  constructor(props) {
+  constructor(props)
+  {
     super(props);
+
+    this.onReset = this.onReset.bind(this);
 
     this.state = {
       event: newEvent(props.inputEvent),
@@ -50,8 +53,8 @@ export class EventCreateScreen extends React.Component
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-
+  componentWillReceiveProps(nextProps)
+  {
     for(var propName in nextProps)
     {
       if(hasMember(this.state, propName))
@@ -63,16 +66,15 @@ export class EventCreateScreen extends React.Component
       //else { console.log("prop2state NOTINSTATE:'"+propName+"'"); }
     }
   }
+
   componentWillUnmount() {
   }
 
   onSave() {
-    //this.setState({ accessingServer: true, errorMsg: undefined, infoMsg: undefined });
     this.props.createEvent({ ...this.state }, store.getState().auth.jwt);  //call backend & set Redux state!
   }
   onReset() {
-    //this.setState({ accessingServer: true, errorMsg: undefined, infoMsg: undefined, event: newEvent(props.inputEvent) });
-    //this.props.createEvent({ ...this.state }, store.getState().auth.jwt);  //call backend & set Redux state!
+    this.setState({ accessingServer: false, errorMsg: undefined, infoMsg: 'Settings reset.', event: newEvent(this.props.inputEvent) });
   }
 
   render() {
@@ -82,10 +84,14 @@ export class EventCreateScreen extends React.Component
 
         <AppTitle style={{marginTop:11}}>Create New Event</AppTitle>
 
+        {/*title*/}
+        <View style={styles.cont}>
+        <TextInput style={COMMON_STYLES.inp} value={this.state.event.title}
+            onChangeText={(val) => this.setState({ event: {...this.state.event, title: val}})} placeholder="Event Title" />
+        </View>
+        {/*AreaOfInteres*/}
         <View style={styles.cont}>
           <AppText style={styles.sttng}>Area of Interest:</AppText>
-
-          {/*AreaOfInteres*/}
           <Picker style={styles.pckr} mode="dropdown"
             selectedValue={this.state.event.areaOfInterest}
             onValueChange={(itemValue, itemIndex) => this.setState({ event: {...this.state.event, areaOfInterest: itemValue}})}>

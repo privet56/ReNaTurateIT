@@ -50,7 +50,7 @@ export class AppHeader extends React.Component
                     onPress={this.props.onPressRight}
                     style={[styles.button, { width: 55, height: 33, alignSelf: 'center' }, !this.props.onPressRight ? styles.disabledButton : {}]}>
                     <Text style={[styles.text, !this.props.onPressRight ? styles.disabledText : {}]}>
-                        &gt;
+                        { this.props.rightText ? this.props.rightText : '&gt;' }
                     </Text>
                 </TouchableOpacity>
                 }
@@ -72,14 +72,18 @@ const styles = StyleSheet.create({
     backgroundColor: BG_COLOR,
     borderRadius: 5,
     paddingVertical: 8,
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   disabledButton: {
     borderColor: DISABLED_COLOR
   },
   text: {
     color: TEXT_COLOR,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   disabledText: {
     color: DISABLED_COLOR

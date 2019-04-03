@@ -16,7 +16,7 @@ export class EventsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       //TODO: + icon for onPressRight->CreateNewEvent
-      header: <AppHeader onPressRight={() => {
+      header: <AppHeader rightText='+' onPressRight={() => {
         navigation.navigate('EventCreate', {origin: 'Events'});
       }}>Events</AppHeader>
     }
@@ -25,7 +25,7 @@ export class EventsScreen extends React.Component {
   state = {
     un:'{unknown user}'
   }
-
+  
   constructor(props) {
     super(props);
     this.state = { isLoading: true }
