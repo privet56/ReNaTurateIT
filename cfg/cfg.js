@@ -1,4 +1,4 @@
-export const expoBackendUrl = global.__DEV__ ? 'http://ms.com/' : 'http://10.0.2.2/'; //TODO: set PROD url!
+export const expoBackendUrl = global.__DEV__ ? 'http://10.0.2.2:8080/v008/' : 'http://ms.com/'; //TODO: set PROD url!
 
 export const settingsInputData = { //TODO: query from server!
     areaOfInterest : [

@@ -1,10 +1,11 @@
 import { EVENT_CREATE, EVENT_CREATE_SUCCESS, EVENT_CREATE_ERROR } from './types';
 import { expoBackendUrl } from '../../cfg/cfg';
+import { makeAbs } from '../../components/util';
 
-export const createEventData = eventData => {
+export const createEventData = accessingServer => {
     return {
         type: EVENT_CREATE,
-        payload: eventData
+        payload: accessingServer
     }
 }
 export const createEventSuccessData = infoMsg => {
@@ -20,6 +21,41 @@ export const createEventErrorData = errorMsg => {
     }
 }
   
-export const createEventAndDispatch = (eventData, jwt, dispatch) => {
-    console.log("//TODO:!");
+export const createEventAndDispatch = async (event, jwt, dispatch) => {
+
+    dispatch(createEventData(true));
+
+    const expoBackendUrl4Event = makeAbs(expoBackendUrl, "event");
+    const url = `${expoBackendUrl4Event}?region=${event.region}&areaofinterest=${event.areaOfInterest}&jwt=${jwt}&title=${event.title}`;
+    var data  = new FormData();
+    data.append( "json", JSON.stringify({...event, jwt}));
+    try
+    {
+        let res = (await fetch(url, {
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',     //alternative: 'Content-Type': 'application/x-www-form-urlencoded'
+            'Authorization': 'Bearer ' + jwt        //alternative: 'Authorization': 'Basic '+btoa(jwt)
+            },
+            method: "POST",
+            body: JSON.stringify({...event, jwt})  //alternative: data:FormData
+        }));
+        if((res.status >= 200) && (res.status < 300))
+        {
+            //TODO: res.json();            
+            console.log("actions:createEventAndDispatch:SUCCESS("+res.status+"): "+JSON.stringify(res));
+            return dispatch(createEventSuccessData("Event created!"));
+        }
+        else
+        {
+            console.log("actions:createEventAndDispatch:ERROR("+res.status+"):Internal Server Error   url:"+url+"\n"+JSON.stringify(res));
+            return dispatch(createEventErrorData("Internal Server Error"));
+        }
+    }
+    catch(e)
+    {
+        console.log("actions:createEventAndDispatch:ERROR:invalid Server response   url:"+url+"\n"+e);
+        console.log(e);
+        return dispatch(createEventErrorData("Invalid Server Response"));
+    }
 }

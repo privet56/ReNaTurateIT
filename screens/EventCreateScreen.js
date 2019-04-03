@@ -20,9 +20,11 @@ import AppButton from '../components/AppButton';
 import AppLoading from '../components/AppLoading';
 
 import { connect } from 'react-redux';
-import { doSaveSettingsAndDispatch } from '../flux/actions/actions.settings';
+import { createEventAndDispatch } from '../flux/actions/actions.event';
 import { subscribe } from 'redux-subscriber';
 import store from '../flux/store';
+import { Event, newEvent } from '../model/event';
+import { hasMember } from '../components/util';
 
 import { settingsInputData as defaultSettingsInputData } from '../cfg/cfg';
 
@@ -40,25 +42,37 @@ export class EventCreateScreen extends React.Component
     super(props);
 
     this.state = {
-      areaOfInterest: null,
-      region: null,
-      timeWindow: null,
+      event: newEvent(props.inputEvent),
       errorMsg: undefined,
       infoMsg: undefined,
       accessingServer: false,
       settingsInputData: defaultSettingsInputData,
     }
   }
+
+  componentWillReceiveProps(nextProps) {
+
+    for(var propName in nextProps)
+    {
+      if(hasMember(this.state, propName))
+      {
+        var o = {};
+        o[propName] = nextProps[propName];
+        this.setState(o);
+      }
+      //else { console.log("prop2state NOTINSTATE:'"+propName+"'"); }
+    }
+  }
   componentWillUnmount() {
   }
 
   onSave() {
-    this.setState({ accessingServer: true, errorMsg: undefined, infoMsg: undefined });
-    this.props.createEvent({...this.state }, store.getState().auth.jwt);  //call backend & set Redux state!
+    //this.setState({ accessingServer: true, errorMsg: undefined, infoMsg: undefined });
+    this.props.createEvent({ ...this.state }, store.getState().auth.jwt);  //call backend & set Redux state!
   }
   onReset() {
-    this.setState({ accessingServer: true, errorMsg: undefined, infoMsg: undefined, areaOfInterest: null, region: null, timeWindow: null });
-    this.props.createEvent({...this.state }, store.getState().auth.jwt);  //call backend & set Redux state!
+    //this.setState({ accessingServer: true, errorMsg: undefined, infoMsg: undefined, event: newEvent(props.inputEvent) });
+    //this.props.createEvent({ ...this.state }, store.getState().auth.jwt);  //call backend & set Redux state!
   }
 
   render() {
@@ -73,8 +87,8 @@ export class EventCreateScreen extends React.Component
 
           {/*AreaOfInteres*/}
           <Picker style={styles.pckr} mode="dropdown"
-            selectedValue={this.state.areaOfInterest}
-            onValueChange={(itemValue, itemIndex) => this.setState({areaOfInterest: itemValue})}>
+            selectedValue={this.state.event.areaOfInterest}
+            onValueChange={(itemValue, itemIndex) => this.setState({ event: {...this.state.event, areaOfInterest: itemValue}})}>
               <Picker.Item label="[None]" value="" />
               {
                 this.state.settingsInputData.areaOfInterest.map((itemValue, itemIndex) => {
@@ -88,29 +102,14 @@ export class EventCreateScreen extends React.Component
           <AppText style={styles.sttng}>Region:</AppText>
 
           <Picker style={styles.pckr} mode="dropdown"
-            selectedValue={this.state.region}
-            onValueChange={(itemValue, itemIndex) => this.setState({region: itemValue})}>
+            selectedValue={this.state.event.region}
+            onValueChange={(itemValue, itemIndex) => this.setState({event: {...this.state.event, region: itemValue}})}>
             <Picker.Item label="[None]" value="" />
             {
                 this.state.settingsInputData.region.map((itemValue, itemIndex) => {
                    return <Picker.Item label={itemValue.label} value={itemValue.value} key={itemValue.value} /> 
                 })
               }
-          </Picker>
-        </View>
-        {/*TimeWindow*/}
-        <View style={styles.cont}>
-          <AppText style={styles.sttng}>Time Window:</AppText>
-
-          <Picker style={styles.pckr} mode="dropdown"
-            selectedValue={this.state.region}
-            onValueChange={(itemValue, itemIndex) => this.setState({region: itemValue})}>
-            <Picker.Item label="[None]" value="" />
-            {
-                this.state.settingsInputData.timeWindow.map((itemValue, itemIndex) => {
-                   return <Picker.Item label={itemValue.label} value={itemValue.value} key={itemValue.value} /> 
-                })
-            }
           </Picker>
         </View>
 
@@ -166,18 +165,19 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = storeState => {
+const mapStateToProps = (storeState, ownProps, ownState) => {
   return {
     errorMsg: storeState.event.errorMsg,
     infoMsg: storeState.event.infoMsg,
     accessingServer: storeState.event.accessingServer,
+    //event: storeState.event.event,
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    createEvent: (eventData, jwt) => {
-        createEventAndDispatch(eventData, jwt, dispatch)
+    createEvent: (state, jwt) => {
+        createEventAndDispatch(state.event, jwt, dispatch)
     },
   }
 };
