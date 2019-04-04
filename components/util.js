@@ -30,3 +30,15 @@ export const httpHeaders4BackendJsonApi = (jwt) => {
         'Authorization': 'Bearer ' + jwt        //alternative: 'Authorization': 'Basic '+ btoa(jwt)
     }
 }
+export const removeArrayEle = (a, s) => {
+    return a.filter(ele => ele != s);
+}
+export const addArrayEle = (a, s) => {
+    if((typeof s) === 'undefined')
+    {
+        console.log("addArrayEle:ERR:!s:"+s);
+        return [...a];
+    }
+    if(a.includes(s)) return [...a];
+    return [...a, s];
+}

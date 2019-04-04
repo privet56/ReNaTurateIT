@@ -10,6 +10,7 @@ import AppLoading from '../components/AppLoading';
 
 import { connect } from 'react-redux';
 import { expoBackendUrl } from '../cfg/cfg';
+import store from '../flux/store';
 
 export class EventsScreen extends React.Component {
 
@@ -33,7 +34,7 @@ export class EventsScreen extends React.Component {
 
   //system function, called after app start
   componentDidMount() {
-    this.loadEventData()
+    this.loadEventData();
   }
 
   render() {

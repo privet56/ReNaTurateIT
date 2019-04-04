@@ -13,18 +13,22 @@ import {
   View,
 } from 'react-native';
 
+import { CheckBox } from 'react-native-elements';
+
 import { AppTitle } from '../components/AppTitle';
 import AppText from '../components/AppText';
 import AppHeader from '../components/AppHeader';
 import AppButton from '../components/AppButton';
 import AppLoading from '../components/AppLoading';
+import DatePicker from 'react-native-datepicker'
 
 import { connect } from 'react-redux';
 import { createEventAndDispatch } from '../flux/actions/actions.event';
 import { subscribe } from 'redux-subscriber';
 import store from '../flux/store';
 import { Event, newEvent } from '../model/event';
-import { hasMember } from '../components/util';
+import { hasMember, removeArrayEle, addArrayEle } from '../components/util';
+import { Date2Ms, Ms2Date } from '../components/timeutil';
 
 import { settingsInputData as defaultSettingsInputData } from '../cfg/cfg';
 
@@ -92,13 +96,59 @@ export class EventCreateScreen extends React.Component
 
         {/*description*/}
         <View style={styles.cont}>
-        <TextInput style={[COMMON_STYLES.inp, {textAlignVertical: "top", alignItems: "flex-start", height: 66}]} value={this.state.event.description}
-            multiline={true} numberOfLines={5} underlineColorAndroid='transparent'
+        <TextInput style={[COMMON_STYLES.inp, {textAlignVertical: "top", alignItems: "flex-start", height: 50}]} value={this.state.event.description}
+            multiline={true} numberOfLines={3} underlineColorAndroid='transparent'
             onChangeText={(val) => this.setState({ event: {...this.state.event, description: val}})} placeholder="Description" />
         </View>
 
-        {/*startDate*/}
-        {/*endDate*/}
+        {/*startDate & endDate */}
+        <View style={[styles.cont, {justifyContent: 'center', alignItems: 'center', textAlign: 'center'}]}>
+          <DatePicker style={{width: 150}}  mode="date" placeholder="start date" format="YYYY-MMM-DD" minDate="2015-Jan-01" maxDate="2035-Jan-01" confirmBtnText="OK" cancelBtnText="Cancel"
+            customStyles={{
+              dateIcon: {
+                position: 'absolute',
+                left: 0,
+                top: 4,
+                marginLeft: 0
+              },
+              dateInput: { marginLeft: 36 }
+            }}
+            date={Ms2Date(this.state.event.startDate, false)}
+            onDateChange={(date) => {this.setState({ event: {...this.state.event, startDate: Date2Ms(date)}})}} />
+
+          <DatePicker style={{width: 150}}  mode="date" placeholder="end date" format="YYYY-MMM-DD" minDate="2015-Jan-01" maxDate="2035-Jan-01" confirmBtnText="OK" cancelBtnText="Cancel"
+            customStyles={{
+              dateIcon: {
+                position: 'absolute',
+                left: 0,
+                top: 4,
+                marginLeft: 0
+              },
+              dateInput: { marginLeft: 36 }
+            }}
+            date={Ms2Date(this.state.event.endDate, false)}
+            onDateChange={(date) => {
+              this.setState({ event: {...this.state.event, endDate: Ms2Date(date)}});
+
+              { //TODO: check with junit tests if conversion back & forth is working correctly!
+                var ms = Date2Ms(date);
+                var date2 = Ms2Date(ms);
+              }
+
+            }} />
+
+        </View>
+
+        <View style={styles.cont}>
+          <CheckBox center title='I am going...  ' iconRight iconType='material' checkedIcon='clear' uncheckedIcon='add' checkedColor='red'
+          checked={(this.state.event.participants.includes(store.getState().auth.un))}
+          onPress={() => {
+            let bGoingNow = this.state.event.participants.includes(store.getState().auth.un);
+            this.setState({event: {...this.state.event, participants: bGoingNow ? removeArrayEle(this.state.event.participants, store.getState().auth.un) : addArrayEle(this.state.event.participants, store.getState().auth.un)}});
+          }} />
+        </View>
+
+        {/* //TODO: startTime, endTime, URL, Status */}
 
         {/*type*/}
         <View style={styles.cont}>

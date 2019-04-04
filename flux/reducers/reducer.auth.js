@@ -26,7 +26,7 @@ const authDataReducer = (state = initialState, action) => {
           ...state,
           jwt: null,
           errorMsg: action.payload.result,
-        };  
+        };
       }
 
       return {

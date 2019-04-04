@@ -28,7 +28,7 @@ export const COMMON_STYLES = StyleSheet.create({
     textAlign: 'center',
   },
   inp: {
-    height: 33, borderColor: 'lightgray', borderWidth: 1, marginRight: 9, marginLeft: 9, padding: 9, marginTop: 11,
+    height: 33, borderColor: 'lightgray', borderWidth: 1, marginRight: 9, marginLeft: 9, padding: 9, marginTop: 3,
     width: '95%',
     justifyContent: 'center',
     alignItems: 'center',
