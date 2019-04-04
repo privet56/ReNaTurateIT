@@ -89,6 +89,33 @@ export class EventCreateScreen extends React.Component
         <TextInput style={COMMON_STYLES.inp} value={this.state.event.title}
             onChangeText={(val) => this.setState({ event: {...this.state.event, title: val}})} placeholder="Event Title" />
         </View>
+
+        {/*description*/}
+        <View style={styles.cont}>
+        <TextInput style={[COMMON_STYLES.inp, {textAlignVertical: "top", alignItems: "flex-start", height: 66}]} value={this.state.event.description}
+            multiline={true} numberOfLines={5} underlineColorAndroid='transparent'
+            onChangeText={(val) => this.setState({ event: {...this.state.event, description: val}})} placeholder="Description" />
+        </View>
+
+        {/*startDate*/}
+        {/*endDate*/}
+
+        {/*type*/}
+        <View style={styles.cont}>
+          <AppText style={styles.sttng}>Type:</AppText>
+
+          <Picker style={styles.pckr} mode="dropdown"
+            selectedValue={this.state.event.type}
+            onValueChange={(itemValue, itemIndex) => this.setState({event: {...this.state.event, type: itemValue}})}>
+            <Picker.Item label="[None]" value="" />
+            {
+                this.state.settingsInputData.type.map((itemValue, itemIndex) => {
+                   return <Picker.Item label={itemValue.label} value={itemValue.value} key={itemValue.value} /> 
+                })
+              }
+          </Picker>
+        </View>
+
         {/*AreaOfInteres*/}
         <View style={styles.cont}>
           <AppText style={styles.sttng}>Area of Interest:</AppText>

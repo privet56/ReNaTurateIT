@@ -19,4 +19,9 @@ export const settingsInputData = { //TODO: query from server!
         { label: '2 Months', value: '2month' },
         { label: '1 Year', value: '1year' },
     ],
+    type : [
+        { label: 'Congress', value: 'congress' },
+        { label: 'Fair', value: 'fair' },
+        { label: 'Presentation', value: 'presentation' },
+    ],
 };

@@ -158,7 +158,7 @@ export class EventsScreen extends React.Component {
   // format a date in milliseconds to string
   formatDate(dateInMillis) {
     const date = new Date(dateInMillis);
-    console.log("date: " + date.toUTCString());
+    //console.log("date: " + date.toUTCString());
     return date.toUTCString().substr(5, 11);
   }
   

@@ -23,3 +23,10 @@ export const makeAbs = (s1, s2) => {
     console.log("makeAbs:ERR: unhandled("+slash1+"+"+slash2+"): '"+s1+"' <> '"+s2+"'");
     return s1 + s2;
 }
+export const httpHeaders4BackendJsonApi = (jwt) => {
+    return {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',     //alternative: 'Content-Type': 'application/x-www-form-urlencoded'
+        'Authorization': 'Bearer ' + jwt        //alternative: 'Authorization': 'Basic '+ btoa(jwt)
+    }
+}

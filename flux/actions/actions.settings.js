@@ -1,5 +1,6 @@
 import { SETTINGS_DATA_CHANGE } from './types';
 import { expoBackendUrl } from '../../cfg/cfg';
+import { httpHeaders4BackendJsonApi } from '../../components/util';
 
 export const setSettingsData = settingsData => {
   return {
@@ -15,11 +16,7 @@ export const doSaveSettingsAndDispatch = (settingsData, jwt, dispatch) => {
   //TODO: use asyn/await for better readability
   const req = fetch(url,
     {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',     //alternative: 'Content-Type': 'application/x-www-form-urlencoded'
-          'Authorization': 'Bearer ' + jwt        //alternative: 'Authorization': 'Basic '+btoa(jwt)
-        },
+        headers: httpHeaders4BackendJsonApi(jwt),
         method: "POST",
         body: JSON.stringify({...settingsData, jwt})  //alternative: data:FormData
     });

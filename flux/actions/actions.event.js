@@ -1,6 +1,7 @@
 import { EVENT_CREATE, EVENT_CREATE_SUCCESS, EVENT_CREATE_ERROR } from './types';
 import { expoBackendUrl } from '../../cfg/cfg';
 import { makeAbs } from '../../components/util';
+import { httpHeaders4BackendJsonApi } from '../../components/util';
 
 export const createEventData = accessingServer => {
     return {
@@ -32,11 +33,7 @@ export const createEventAndDispatch = async (event, jwt, dispatch) => {
     try
     {
         let res = (await fetch(url, {
-            headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',     //alternative: 'Content-Type': 'application/x-www-form-urlencoded'
-            'Authorization': 'Bearer ' + jwt        //alternative: 'Authorization': 'Basic '+btoa(jwt)
-            },
+            headers: httpHeaders4BackendJsonApi(jwt),
             method: "POST",
             body: JSON.stringify({...event, jwt})  //alternative: data:FormData
         }));
