@@ -4,9 +4,9 @@
 ```sh
 cd ./build/
 # build docker image
-docker build -t renabuilder .
+docker build -t renabuilder . >build.log 2>&1         # watch in another terminal with: tail build.log -f
 # del: docker rmi renabuilder
-# check if image built:
+# check if image built (ca. 7,45 GB, created in ca. 5 - 10 mins):
 docker image ls | grep renabuilder
 ```
 ## Execute android build
